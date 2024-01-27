@@ -174,6 +174,14 @@ def run(
                 else:
                     masks = process_mask(proto[i], det[:, 6:], det[:, :4], im.shape[2:], upsample=True)  # HWC
                     det[:, :4] = scale_boxes(im.shape[2:], det[:, :4], im0.shape).round()  # rescale boxes to im0 size
+                    st = 'det[:, :4]= ' + str(det[:, :4])
+                    LOGGER.info(st)
+                    st = 'masks= ' + str(masks)
+                    LOGGER.info(st)
+                    m = masks.cpu()
+                    arr = m.numpy()
+                    LOGGER.info(str(arr.shape))
+                    l = arr.tolist()
 
                 # Segments
                 if save_txt:
